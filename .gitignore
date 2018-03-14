@@ -38,6 +38,7 @@ Thumbs.db
 .classpath
 .idea
 .mvn
+.gradle
 *.iml
 atlassian-ide-plugin.xml
 target

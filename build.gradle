@@ -1,0 +1,101 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.0.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+repositories {
+    mavenCentral()
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    group 'io.github.benkoff'
+}
+
+subprojects {
+    apply plugin: 'application'
+    apply plugin: 'org.springframework.boot'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        //compile 'org.springframework.boot:spring-boot-starter'
+        compile 'org.projectlombok:lombok:1.16.10'
+        testCompile 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    test.testLogging {
+        events "skipped", "failed"
+        exceptionFormat "SHORT"
+        showStandardStreams = true
+    }
+
+    test {
+        afterTest { desc, result ->
+            println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+        }
+    }
+}
+
+project(':sso-client') {
+    jar {
+        baseName = "sso-client"
+        version = "1.0"
+    }
+
+    mainClassName = "java.io.github.benkoff.ssoclient.SsoClientApplication"
+
+    dependencies {
+        compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+		compile('org.springframework.boot:spring-boot-starter-web')
+		compile('org.springframework.cloud:spring-cloud-starter-oauth2')
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
+}
+
+project(':sso-server') {
+    jar {
+        baseName = "sso-server"
+        version = "1.0"
+    }
+
+    mainClassName = "java.io.github.benkoff.ssoserver.SsoServerApplication"
+
+    dependencies {
+		compile('org.springframework.boot:spring-boot-starter-web')
+		compile('org.springframework.cloud:spring-cloud-starter-oauth2')
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
