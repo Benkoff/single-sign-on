@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.RELEASE'
+		springBootVersion = '1.5.10.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -26,15 +26,14 @@ repositories {
 
 
 ext {
-	springCloudVersion = 'Finchley.M8'
+	springCloudVersion = 'Brixton.SR7'
 }
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.cloud:spring-cloud-starter-oauth2')
-	// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4
-	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
